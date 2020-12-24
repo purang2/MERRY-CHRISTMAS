@@ -43,6 +43,8 @@
 
 
 /* RPI64_CLIENT .C */
+/* CLIENT MERRY VERSION */
+
 
 int p1x;         /* player 1's location */
 int p1y;
@@ -67,6 +69,7 @@ void die(int a);
 
 /* Multi Threading : Bomb function Bomb1-Bomb2 concurrent */
 
+/**/
 void *firstbombThreadRun(){
         if(bomb1 == false){
                 bomb1 = true;
@@ -92,28 +95,55 @@ void *secondbombThreadRun(){
        }
 
 }
+*/
 
-
-/* RPI_CLIENT .C */
+/* MERRY .C */
 
 int main()
 {
+ 
+  /*
         end = 0;
         /*variables for the Logic */
+        
         p1x = 0;        p1y = 0;
         p2x = 7;        p2y = 7;
         bomb1 = false;
         bomb2 = false;
+ */
         int key;
         int i,j;
         map= (unsigned short*)malloc(1024);
+        
+        char james[8][8];
+        james = {{'o'.'o','g','o','o','o','o','o'},
+                 {'o','g','g','g','r','o','o','o'},
+                 {'o','r','r','r','r','r','r','o'},
+                 {'o','r','g','g','g','g','r','r'},
+                 {'o','g','b','g','g','b','g','o'},
+                 {'o','g','g','g','g','g','g','o'},
+                 {'o','r','r','r','r','r','r','o'},
+                 {'o','o','r','r','r','r','o','o'}
+                };
+ 
         /* Initialization */
         for(i = 0; i<8; i++)
                     for(j = 0; j<8; j++)
                         *(map+i*8+j)=0;
-        *(map+p1y*8+p1x) = RGB565_RED;
-        *(map+p2y*8+p2x) = RGB565_GREEN;
-
+        //*(map+p1y*8+p1x) = RGB565_RED;
+        //*(map+p2y*8+p2x) = RGB565_GREEN;
+        for(i = 0; i<8; i++){
+                    for(j = 0; j<8; j++){
+                        
+                     if(james[i][j]=='o') *(map+i*8+j)=RGB565_GREEN;
+                     if(james[i][j]=='g') *(map+i*8+j)=0xFFFF;
+                     if(james[i][j]=='r') *(map+i*8+j)=RGB565_RED;
+                     if(james[i][j]=='b') *(map+i*8+j)=0;
+                    }
+        }
+       
+ 
+        
         pthread_t firstThread, secondThread, firstbombThread, secondbombThread;
         int threadErr;
 
@@ -148,7 +178,7 @@ int main()
         /////////////////////////////////////////
 
         //Main Logic : 게임
-
+                /*
                 if(end){
                         end = false;
                         sleep(7);
@@ -165,7 +195,8 @@ int main()
                         *(map+p1y*8+p1x) = RGB565_RED; // P1's Location /
                         *(map+p2y*8+p2x) = RGB565_GREEN; // P2's Location
 
-                }
+                }*/
+                /*
                 printf("input: ");
 
                 key = getch();           // 3. 방향키가 입력될 때 27 00 00 이 버퍼에 있다. 27부터 빼준다. 마지막으로 어느방향인지 구분
@@ -218,12 +249,12 @@ int main()
                         else
                                 printf("NOPE\n");
                 }
-
+                 
                 for(i = 0; i<8; i++){
                         for(j = 0; j<8; j++) printf("%u",*(map+i*8+j));
                         printf("\n");
                 }
-
+                 */
                 /* socket size = char(1)x8x8 */
                 /* last bit(65): Win-flag (isWin?->false/default:0, True:'1' or '2' or '3' (W/L/D) )*/
                 write(sockfd, map, 1024);
@@ -243,7 +274,7 @@ int main()
         }
 }
 
-
+/*
 void die(int a){
         int i, j;
         printf("BOMB!!!!!\n");
@@ -298,7 +329,9 @@ void die(int a){
          }
 
  }
-
+*/
+ 
+ /*
 
 
 void move(int m){
@@ -369,7 +402,7 @@ void move(int m){
                         break;
         }
 
-}
+}*/
 
 
 /* 리눅스 환경에서 getch()를 구현한 코드*/
