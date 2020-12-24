@@ -196,12 +196,62 @@ int main()
                         *(map+p2y*8+p2x) = RGB565_GREEN; // P2's Location
 
                 }*/
-                /*
-                printf("input: ");
+                printf("MODE 1: SANTA , 2: XMAS TREE 3: RYAN)
+                printf("input MODE : ");
 
                 key = getch();           // 3. 방향키가 입력될 때 27 00 00 이 버퍼에 있다. 27부터 빼준다. 마지막으로 어느방향인지 구분
 
-                if(key== 27|| key ==0) {
+                if(key == 3){
+                                 
+                james = {
+                 {'y','y','y','y','y','y','y','y'},
+                 {'o','o','o','y','y','o','o','o'},
+                 {'y','y','y','y','y','y','y','y'},
+                 {'y','o','y','y','y','y','o','y'},
+                 {'y','y','y','o','o','y','y','y'},
+                 {'y','y','w','w','w','w','y','y'},
+                 {'y','y','w','y','y','w','y','y'},
+                 {'y','y','y','y','y','y','y','y'}
+                  };
+                 
+                 
+                  for(i = 0; i<8; i++){
+                     for(j = 0; j<8; j++){
+                        
+                      if(james[i][j]=='y') *(map+i*8+j)=0xFD89; //orange
+                      if(james[i][j]=='o') *(map+i*8+j)=0
+                      if(james[i][j]=='w') *(map+i*8+j)=0xFFFF;
+                        sleep(25);
+                     }
+                  }
+                 
+                 
+               }
+               else if(key ==1){
+               
+                james = {{'o'.'o','g','o','o','o','o','o'},
+                 {'o','g','g','g','r','o','o','o'},
+                 {'o','r','r','r','r','r','r','o'},
+                 {'o','r','g','g','g','g','r','r'},
+                 {'o','g','b','g','g','b','g','o'},
+                 {'o','g','g','g','g','g','g','o'},
+                 {'o','r','r','r','r','r','r','o'},
+                 {'o','o','r','r','r','r','o','o'}
+                };
+ 
+            for(i = 0; i<8; i++){
+                    for(j = 0; j<8; j++){
+                        
+                     if(james[i][j]=='o') *(map+i*8+j)=RGB565_GREEN;
+                     if(james[i][j]=='g') *(map+i*8+j)=0xFFFF;
+                     if(james[i][j]=='r') *(map+i*8+j)=RGB565_RED;
+                     if(james[i][j]=='b') *(map+i*8+j)=0;
+                    }
+        }
+               
+               }
+         /*
+               if(key== 27|| key ==0) {
                         key = getch();
                         key = getch();
                         switch(key) {
@@ -225,12 +275,12 @@ int main()
                 }
                 else{
                         if(key == BOMB1){
-                                if(threadErr = pthread_create(&firstbombThread, NULL, firstbombThreadRun, NULL)){ /* bomb1 thread생성 */
+                                if(threadErr = pthread_create(&firstbombThread, NULL, firstbombThreadRun, NULL)){ // bomb1 thread생성
                                         printf("Thread Err = %d", threadErr);
                                 }
 
                         }else if(key == BOMB2){
-                                if(threadErr = pthread_create(&secondbombThread, NULL, secondbombThreadRun, NULL)){ /* bomb2 thread생성 */
+                                if(threadErr = pthread_create(&secondbombThread, NULL, secondbombThreadRun, NULL)){ // bomb2 thread생성 
                                         printf("Thread Err = %d", threadErr);
                                 }
                         }else if(key == UP2|| key == 119){
@@ -255,8 +305,8 @@ int main()
                         printf("\n");
                 }
                  */
-                /* socket size = char(1)x8x8 */
-                /* last bit(65): Win-flag (isWin?->false/default:0, True:'1' or '2' or '3' (W/L/D) )*/
+                // socket size = char(1)x8x8
+                // last bit(65): Win-flag (isWin?->false/default:0, True:'1' or '2' or '3' (W/L/D) )
                 write(sockfd, map, 1024);
                 read(sockfd, map, 1024);
 
